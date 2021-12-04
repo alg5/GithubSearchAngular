@@ -1,0 +1,155 @@
+.container {
+    /* width: 600px; */
+    margin: 50px auto;
+    padding: 40px;
+    /* direction: rtl; */
+    padding-top: 0px;/* TODO */
+    /* text-align: right; */
+}
+
+.container h2 {
+    /* text-align: right; */
+    border-bottom: 4px solid #99ccff;
+}
+
+.container .row{
+  display: flex;
+  padding: 0 15px;
+  
+}
+.header-row{
+    /* border:1px solid red; */
+    direction: ltr;
+    float: right;
+    font-size: 12px;
+}
+.top-block {
+    background: #99ccff; 
+    padding: 20px;
+}
+.currency-row
+{
+    padding: 13px;
+}
+.currency-limit-block{
+    margin-left:20px;
+}
+.tbl-container {
+    background: white; 
+    border:1px solid white;
+}
+
+table {
+    width: 100%;
+    border-spacing: 1px;
+    border-collapse: collapse; 
+
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background: white;
+}
+
+th {
+    /* text-align: right !important; */
+    font-weight: bold;
+    font-size: 14px;
+    border-top: none;
+    background: #e7e5e5;
+}
+
+td{
+  background: #f8f8f8;
+}
+
+td:hover {
+  background: #f4f4f4;
+}
+
+td, th {
+    /* padding: 0 10px !important; */
+}
+.crypto-sort{
+  /* border: 1px solid red; */
+  margin-left:2px;
+  vertical-align: top;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 70px;
+    height: 70px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @media only screen and (max-width: 760px) {
+    .currency-limit-block{
+      margin-left:0;
+  }
+  }
+
+  @media only screen and (min-width: 760px){
+    td, th {
+      padding: 0 10px !important;
+  }
+  }
+  @media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 2px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+  	position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+    font-weight: bold;
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	td:nth-of-type(1):before { font-size: bold; content: "Name"; }
+	td:nth-of-type(2):before { content: "Symbol"; }
+	td:nth-of-type(3):before { content: "Price"; }
+	td:nth-of-type(4):before { content: "MarketCap"; }
+  
+	
+}

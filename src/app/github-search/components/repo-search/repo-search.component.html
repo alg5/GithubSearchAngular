@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>{{translations.WelcomeText}} <span class="header-row">{{translations.LastVisit}}:&nbsp;{{lastDate}} | {{lastTime}}</span></h2>
+
+    <form [formGroup]="rForm" >
+      <div class="top-block">
+        <div class="currency-row">
+          <mat-form-field  fxFlex class="form-field currency-limit-block" appearance="outline">
+            <mat-label> {{translations.SearchText}}</mat-label>
+            <input matInput  formControlName="searchKeyword"  >
+            <!-- <mat-error *ngIf="rForm.controls['rowsLimit'].errors?.max">
+                {{translations.ErrorMessageRowsMax}}
+            </mat-error>
+            <mat-error *ngIf="rForm.controls['rowsLimit'].errors?.required">
+                {{translations.ErrorMessageRequares}}
+            </mat-error> -->
+            </mat-form-field>
+        </div>
+        <div class="currency-row"><button (click)="getRepos()" >Search Repositories</button></div>
+
+        <div *ngIf="loading" class="loader"></div>
+          <app-repo-list [repoList]="repoList"></app-repo-list>
+      </div>
+    </form>
+
+
+</div>
+

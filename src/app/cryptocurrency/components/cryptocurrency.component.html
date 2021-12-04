@@ -1,0 +1,67 @@
+<div class="container">
+    <h2>{{translations.WelcomeText}} <span class="header-row">{{translations.LastVisit}}:&nbsp;{{lastDate}} | {{lastTime}}</span></h2>
+        <form [formGroup]="rForm" >
+        <div class="top-block">
+            <div class="currency-row">
+                <mat-form-field  fxFlex>
+                    <mat-label>{{translations.SortOptionText}}</mat-label>
+                    <mat-select formControlName="sortOption" placeholder="{{translations.SortOptionText}}" (selectionChange)="onSortOptionChange($event)">
+                      <mat-option  *ngFor="let sortOption of sortOptions" [value]="sortOption.Value">
+                        {{ sortOption.Text }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="rForm.controls['sortOption'].errors?.required">
+                        {{translations.ErrorMessageRequares}}
+                   </mat-error>
+                </mat-form-field>
+
+                <mat-form-field  fxFlex class="form-field currency-limit-block" appearance="outline">
+                <mat-label> {{translations.LimitText}}</mat-label>
+                <input matInput onlyNumericInteger autocomplete="off"  formControlName="rowsLimit" maxlength="3" >
+                <mat-error *ngIf="rForm.controls['rowsLimit'].errors?.max">
+                    {{translations.ErrorMessageRowsMax}}
+                </mat-error>
+                <mat-error *ngIf="rForm.controls['rowsLimit'].errors?.required">
+                    {{translations.ErrorMessageRequares}}
+                </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="currency-row"><button (click)="getData()" >Get Cryptocurrency data</button></div>
+
+            <div *ngIf="loading" class="loader"></div>
+            
+
+            <div class="tbl-container" *ngIf="criptoDataListFiltered"> 
+
+                
+                <table class="table table-striped table-hover bs-table" (window:resize)="onResize($event)">
+                    <thead>
+                        <tr >
+                          <th scope="col">{{translations.ColName}}</th>
+                          <th scope="col">{{translations.ColSymbol}}</th>
+                          <th scope="col">{{translations.ColPrice}}<i *ngIf="sortOption == SortOptionsEnum.ByPrice" class="fa fa-sort-desc crypto-sort" aria-hidden="true"></i></th>
+                          <th scope="col">{{translations.ColMarketCap}}<i  *ngIf="sortOption == SortOptionsEnum.ByMarketCap" class="fa fa-sort-desc  crypto-sort" aria-hidden="true"></i></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- <ng-container *ngFor="let criptoData of criptoDataListFiltered| slice: (page-1) * pageSize : page * pageSize"> -->
+                        <ng-container *ngFor="let criptoData of criptoDataListFiltered">
+                            <tr>
+                                <td>{{criptoData.name}}</td>
+                                <td>{{criptoData.symbol}}</td>
+                                <td>{{criptoData.metrics.market_data.price_usd | number:'1.2-2' }}</td>
+                                <td>{{criptoData.metrics.marketcap.current_marketcap_usd | number:'1.2-2' }}</td>
+                            </tr>
+                            
+                        </ng-container>
+                      </tbody>
+                </table>
+
+                <div *ngIf="!isMobile && criptoDataList.length > pageSize " class="d-flex justify-content-center">
+                   <ngb-pagination [collectionSize]="criptoDataList.length" [(page)]="page" [pageSize]="pageSize" (pageChange)="onPageChanged($event)">
+                    </ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

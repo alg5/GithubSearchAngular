@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>{{translations.WelcomeText}} <span class="header-row">{{translations.LastVisit}}:&nbsp;{{lastDate}} | {{lastTime}}</span></h2>
+  <form [formGroup]="rForm" >
+      <div class="form-container tbl-container">
+          <h1 class='login-caption'>Sign in</h1>
+          <div class="login-row">
+              <input class="login-input"  matInput type="text" placeholder="login" #usernameobj appAutofocus formControlName="login"
+              maxlength="100" >
+              <!-- <div class="alert" *ngIf="!rForm.controls['username'].valid && rForm.controls['username'].touched">{{ translations.UsernameAlert }}</div> -->
+
+          </div>
+          <div class="login-row">
+              <input class="login-input"  matInput type="password" placeholder="password"  formControlName="password"
+              maxlength="100"
+              [(ngModel)]="password"  >
+              <!-- <div class="alert"  *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">{{ translations.PasswordAlert }}</div> -->
+          </div>
+          <div class="login-row"><button (click)="sendLogin()" [disabled]="!rForm.valid">Sign in</button></div>
+      </div>
+  </form>
+
+
+  <div class="no-data" *ngIf="errorCode < 0">{{translations.ErrorMessage}}</div>
+
+</div>

@@ -1,0 +1,24 @@
+
+        <div *ngIf="repoList && repoList.length > 0;else nodata" class="repo-list-block">
+          <ng-container   *ngFor="let repo of repoList">
+            <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>{{repo.name}}</mat-card-title>
+            </mat-card-header>
+                <img mat-card-image class="repo-owner-avatar" src="{{repo.owner.avatar_url}}" alt=" {{repo.owner.login}}">
+            <mat-card-content>
+                <div class="repo-bottom-row">Author: {{repo.owner.login}}</div>
+            </mat-card-content>
+            <mat-card-footer>
+                <nav>
+                    <a class="button action-link"(click)="bookmark(repo)" title="{{getTitle(repo)}}">
+                      <span *ngIf="!repo.bookmarked"><mat-icon>{{getBookMarkIcon(repo)}}</mat-icon></span>
+                    </a>
+
+                </nav>
+            </mat-card-footer>
+        </mat-card>
+        </ng-container>
+        </div>
+        <ng-template #nodata ><div class='no-data'>{{translations.NoDataMessage}}</div></ng-template>
+
